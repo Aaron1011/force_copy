@@ -1,11 +1,13 @@
 use force_copy::ForceCopy;
+use std::mem::ManuallyDrop;
 
 #[derive(Debug)]
 pub struct NotCopy(pub u8);
 
 #[derive(Copy, Clone)]
 pub struct Wrapper {
-    pub val: ForceCopy<NotCopy>
+    pub val: ForceCopy<NotCopy>,
+    pub with_dtor: ForceCopy<ManuallyDrop<String>>,
 }
 
 #[test]
